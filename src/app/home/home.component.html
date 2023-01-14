@@ -1,0 +1,21 @@
+<div class="header-image">
+    <div class="container container--vertical-center">
+        <h1 class="container__headline">
+            Restoran brze hrane<br>
+            <span class="font-size--4_5">Plankton</span>
+        </h1>
+        <br>
+        <a class="cta-btn" [routerLink]="'/'">
+            NAŠA PRIČA
+        </a>
+    </div>
+</div>
+<div class="container" id="test">
+    <a [routerLink]="'/menu/'+product.url" class="card" [style.background-image]="'url(' + product.img + ')'" [product]="product" *ngFor="let product of [
+        { headline: 'Giros', img: '../assets/img/card/gyros.jpeg', description: 'Ukusi Grcke u srcu Vince...', url: 'gyros'},
+        { headline: 'Pizza', img: '../assets/img/card/pizza.jpeg', description: 'Piza od domaceg testa, pecena na visokoj temperaturi....', url: 'pizzas'},
+        { headline: 'Palacinke', img: '../assets/img/card/pancake.jpeg', description: 'Slatke / Slane - Po babinm receptu...', url: 'pancakes'},
+        { headline: 'Sendvici', img: '../assets/img/card/sandwich.jpeg', description: 'Jede on tebe jedes ti njega...', url: 'sandwich-s'},
+    ]">
+    </a>
+</div>
