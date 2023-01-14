@@ -1,1 +1,400 @@
-/* You can add global styles to this file, and also import other style files */
+/* === MIXIN === */
+
+@mixin flex($justify-content: center, $align-items: center, $flex-direction: row) {
+	display: flex;
+	justify-content: $justify-content;
+	align-items: $align-items;
+	flex-direction: $flex-direction;
+}
+
+/* === MIXIN END === */
+
+/* === SIZES === */
+
+$M: 768px;
+$L: 922px;
+$XL: 1200px;
+$CARD_WIDTH: 300px;
+$CARD_HEIGHT: 400px;
+
+/* === SIZES END === */
+
+/* === COLORS === */
+
+$DARK: #1F1F1F;
+$LIGHT: #F0F0F0;
+$ORANGE: #F09A4F;
+$BLACK: #000;
+$WHITE: #FFF;
+$PLANKTON: #64aa92;
+
+/* === SIZES END === */
+
+/* === TIME === */
+
+$SHORT_TIME: 0.3s;
+$MEDIUM_TIME: 0.7s;
+$LONG_TIME: 1s;
+
+/* === TIME END === */
+
+/** === FONT SIZE === */
+
+$number-array: 1, 1_5, 2, 2_5, 3, 3_5, 4, 4_5, 5, 5_5, 6, 6_5, 7, 7_5, 8, 8_5, 9, 9_5, 10, 10_5, 10, 10_5, 11, 11_5, 12;
+
+.font-size {
+	@each $item in $number-array {
+		&--#{$item} {
+			@if (str-index(#{$item}, '_')) {
+				font-size: #{str-slice(#{$item}, 0, 1)}#{'.'}#{str-slice(#{$item}, 3)}rem!important;
+			} @else {
+				font-size: #{str-slice(#{$item}, 1)}rem!important;
+			}
+		}
+	}
+}
+
+/** === FONT SIZE END === */
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+::selection {
+	background-color: $PLANKTON;
+}
+
+body {
+	background-color:$WHITE;
+	font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+	overflow-x: hidden;
+}
+
+.header {
+	width: 100%;
+	background-color: $BLACK;
+	position: fixed;
+	z-index: 10;
+}
+
+.container {
+	@include flex(space-between);
+	max-width: $XL;
+	margin: 0 auto;
+	padding: 0 1rem;
+
+	&--vertical-center {
+		height: 100%;
+		@include flex(center, flex-start, column);
+	}
+
+	&__headline {
+		color: $WHITE;		
+		text-shadow: 2px 2px 0 $DARK;
+	}
+}
+
+.cta-btn {
+	border: 2px solid $ORANGE;
+	color: $ORANGE;
+	padding: 0.75rem 1.5rem;
+	font-size: 1.5rem;
+	border-radius: 2rem;
+	transition: $SHORT_TIME;
+
+	:is(&:hover) {
+		background-color: $ORANGE;
+		color: $DARK;
+		border-color: $DARK;
+	}
+}
+
+.nav {
+	padding: 0.5rem 0;
+}
+
+.main-menu {
+
+	@include flex();
+	height: 100%;
+
+	&__nav-item {
+
+		margin: 0.5rem;
+		list-style-type: none;
+
+		&__link {
+
+			padding: 0.25rem;
+			display: block;
+			color: $LIGHT;
+			text-decoration: none;
+			transition: $SHORT_TIME;
+
+			:is(&.active, &:hover, &:focus) {
+				box-shadow: 0px 2px 0px $LIGHT;
+			}
+
+			:is(&:focus-visible) {
+				outline: none;
+				box-shadow: 0px 0px 0px 2px $LIGHT;
+			}
+		}
+	}
+}
+
+/* == HEADER IMAGE == */
+
+.header-image {
+	height: 80vh;
+	background-image: url('./assets/img/gyros-header.jpeg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-y: center;
+}
+
+/* === CARD === */
+
+.card {
+	margin: 2rem 0.5rem;
+	overflow: hidden;
+	position: relative;
+	background-color: $DARK;
+	width: 100%;
+	max-width: $CARD_WIDTH;
+	min-height: $CARD_HEIGHT;
+	border-radius: 0.5rem;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 1rem;
+	@include flex(space-between, flex-start, column);
+	transition: $MEDIUM_TIME;
+
+	&__info-icon {
+		@include flex();
+		align-self: end;
+		width: 48px;
+		height: 48px;
+		border: 2px solid $LIGHT;
+		border-radius: 100%;
+		font-size: 2rem;
+		cursor: pointer;
+		position: relative;
+		color: $LIGHT;
+	}
+
+	:is(&__info-icon:hover) + &__tooltip {
+		scale: 1;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&__tooltip {
+		position: absolute;
+		top: 5rem;
+		left: 1rem;
+		right: 1rem;
+		font-size: 1.5rem;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		background-color: rgba($BLACK, 0.8);
+		color: $LIGHT;
+		transition: $SHORT_TIME;
+		scale: 0.8;
+		opacity: 0;
+		visibility: hidden;
+
+		:is(&:hover) {
+			scale: 1;
+			opacity: 1;
+			visibility: visible;
+		}
+
+		&:before {
+			position: absolute;
+			display: block;
+			content: '';
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 10px 8px 10px;
+			border-color: transparent transparent rgba($BLACK, 0.8) transparent;
+			top: -8px;
+			right: 12px;
+		}
+	}
+
+	&__headline {
+		font-weight: 400;
+		font-size: 2rem;
+		color: $LIGHT;
+		z-index: 1;
+	}
+
+	&__overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%);
+		height: calc($CARD_HEIGHT / 2);
+		transition: $MEDIUM_TIME;
+	}
+	
+	:is(&:hover) &__overlay {
+		bottom: -50px;
+	}
+
+}
+
+/* === CARD END === */
+
+/* === MENU === */
+
+.section {
+	@include flex(flex-start);
+	height: 100vh;
+	background-size: cover;
+	background-position: right center;
+	position: relative;
+	z-index: 1;
+
+	&__headline {
+		position: absolute;
+		left: 50%;
+		top: 1rem;
+		text-align: center;
+		font-size: 16rem;
+		color: $WHITE;
+		transform: translate(-50%, 0%);
+		transform-origin: left top;
+		text-shadow: 4px 4px 1px $BLACK;
+		animation: HEADLINE-ANIMATION 2s forwards;
+	}
+
+	@keyframes HEADLINE-ANIMATION {
+		0% { opacity: 0.1;}
+		100% { opacity: 1;}
+	}
+
+	&__dark {
+
+		@include flex(center, center, column);
+		width: 50%;
+		height: 100%;
+		padding: 1rem;
+		background-color: rgba($BLACK, 0.5);
+		color: $WHITE;
+	}
+	
+
+	&__table {
+
+		z-index: 2;
+		text-align: left;
+
+		th, 
+		td {
+
+			background-color: rgba($ORANGE, 0.95);
+			color: $BLACK;
+			padding: 0.5rem;
+			border-radius: 0.5rem;
+		}
+
+		tfoot th, 
+		tfoot td {
+
+			background-color: rgba($PLANKTON, 0.95);
+		}
+	}
+
+	@media only screen and (max-width: $M) {
+		&__dark {
+			width: 100%;
+		}
+	}
+}
+
+/* === MENU END === */
+
+/* === FOOTER === */
+
+.footer {
+	
+	color: $WHITE;
+	text-align: center;
+	
+	background-color: $DARK;
+
+	&__headline {
+		padding: 1rem;
+		background-color: $BLACK;
+	}
+
+	&__content {
+
+		@include flex(flex-start, flex-start);
+		margin: 0 auto;
+		max-width: $XL;
+		padding: 2rem 1rem;
+		
+		flex-wrap: wrap;
+
+		&__item {
+			margin: 1rem;
+			text-align: left;
+			flex-basis: calc(25% - 2rem);
+
+			h3 {
+				color: $ORANGE;
+				margin: 0.5rem 0;
+				font-size: 1.25rem;
+			}
+
+			p {
+
+				span {
+
+					color: $ORANGE;
+				}
+
+				a {
+					color: $WHITE;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		@media only screen and (max-width: $M) {
+
+			&__item {
+				flex-basis: calc(50% - 2rem);
+				text-align: center;
+			}
+		}
+	}
+
+	&__social-media {
+		padding: 1rem;
+		background-color: $BLACK;
+
+		&__item {
+			cursor: pointer;
+			border-radius: 100%;
+			margin: 0 1rem;
+
+			img {
+				width: 48px;
+				height: 48px;
+				border-radius: 100%;
+			}
+		}
+	}
+}
+
+/* === FOOTER END === */
