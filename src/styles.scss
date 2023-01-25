@@ -23,10 +23,10 @@ $CARD_HEIGHT: 400px;
 
 $DARK: #1F1F1F;
 $LIGHT: #F0F0F0;
-$ORANGE: #F09A4F;
+$ORANGE: rgb(243 128 1);
 $BLACK: #000;
 $WHITE: #FFF;
-$PLANKTON: #64aa92;
+$PLANKTON: rgb(47 110 21);
 
 /* === SIZES END === */
 
@@ -299,9 +299,8 @@ body {
 
 		th, 
 		td {
-
 			background-color: rgba($ORANGE, 0.95);
-			color: $BLACK;
+			color: $WHITE;
 			padding: 0.5rem;
 			border-radius: 0.5rem;
 		}
