@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-
 @Component({
   selector: '.card',
   templateUrl: './card.component.html'

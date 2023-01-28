@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ScrollToTopService } from '../shared/scroll-to-top.service';
 
 @Component({
-  selector: 'app-partnership',
-  templateUrl: './partnership.component.html'
+  selector: 'app-contact',
+  templateUrl: './contact.component.html'
 })
-export class PartnershipComponent {
+export class ContactComponent {
   constructor(private _scrollToTop: ScrollToTopService) {
     this._scrollToTop.scrollToTop();
   }

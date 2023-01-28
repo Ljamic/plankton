@@ -5,11 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from './shared/card/card.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { OurStoryComponent } from './our-story/our-story.component';
 import { PartnershipComponent } from './partnership/partnership.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
 	declarations: [
@@ -20,7 +21,8 @@ import { PartnershipComponent } from './partnership/partnership.component';
     	FooterComponent,
      	MenuComponent,
       OurStoryComponent,
-      PartnershipComponent
+      PartnershipComponent,
+      ContactComponent
 	],
 	imports: [
 		BrowserModule,

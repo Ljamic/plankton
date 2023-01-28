@@ -11,10 +11,10 @@
 
 /* === SIZES === */
 
+$S: 576px;
 $M: 768px;
 $L: 922px;
 $XL: 1200px;
-$CARD_WIDTH: 300px;
 $CARD_HEIGHT: 400px;
 
 /* === SIZES END === */
@@ -70,7 +70,7 @@ $number-array: 1, 1_5, 2, 2_5, 3, 3_5, 4, 4_5, 5, 5_5, 6, 6_5, 7, 7_5, 8, 8_5, 9
 body {
 	background-color:$WHITE;
 	font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-	overflow-x: hidden;
+	
 }
 
 .header {
@@ -78,26 +78,57 @@ body {
 	background-color: $BLACK;
 	position: fixed;
 	z-index: 10;
+	height: 60px;
 }
 
 .container {
+
 	@include flex(space-between);
 	max-width: $XL;
 	margin: 0 auto;
 	padding: 0 1rem;
+	overflow-x: hidden;
 
 	&--vertical-center {
+
+		width: 100%;
 		height: 100%;
 		@include flex(center, flex-start, column);
+		padding-top: 3rem;
+	}
+
+	&--partnership {
+
+		flex-direction: column;
+		text-align: center;
+		padding: 1rem;
+	}
+
+	&--contact {
+
+		gap: 1rem;
+		@include flex(flex-start, flex-start);
+		padding-top: calc(2rem + 60px);
+		padding-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	&--card {
+
+		flex-wrap: wrap;
 	}
 
 	&__headline {
+
 		color: $WHITE;		
-		text-shadow: 2px 2px 0 $DARK;
+		text-shadow: 2px 2px 0 $BLACK;
 	}
+
+	
 }
 
 .cta-btn {
+
 	border: 2px solid $ORANGE;
 	color: $ORANGE;
 	padding: 0.75rem 1.5rem;
@@ -112,8 +143,45 @@ body {
 	}
 }
 
+.burger-menu {
+	display: none;
+	margin-top: 1rem;
+	flex-direction: column;
+	height: 2rem;
+	cursor: pointer;
+
+	@media only screen and (max-width: $M) {
+		display: flex;
+	}
+
+	&__dashe {
+		margin-top: 5px;
+		width: 2rem;
+		height: 4px;
+		background-color: $WHITE;
+	}
+
+	&--active {
+		& + .nav {
+			@media only screen and (max-width: $M) {
+				display: block;
+			}
+		}
+	} 
+}
+
 .nav {
 	padding: 0.5rem 0;
+
+	@media only screen and (max-width: $M) {
+		display: none;
+		padding: 0;
+		position: fixed;
+		left: 0;
+		top: 60px;
+		right: 0;
+		bottom: 0;
+	}
 }
 
 .main-menu {
@@ -121,18 +189,105 @@ body {
 	@include flex();
 	height: 100%;
 
+	@media only screen and (max-width: $M) {
+		background-color: $BLACK;
+		flex-direction: column;
+	}
+
 	&__nav-item {
 
 		margin: 0.5rem;
 		list-style-type: none;
 
+		@media only screen and (max-width: $M) {
+			width: 100%;
+			padding: 0 2rem;
+		}
+
 		&__link {
 
-			padding: 0.25rem;
 			display: block;
+			padding: 0.25rem;
 			color: $LIGHT;
 			text-decoration: none;
 			transition: $SHORT_TIME;
+
+			:is(&.active, &:hover, &:focus) {
+				box-shadow: 0px 2px 0px $LIGHT;
+			}
+
+			:is(&:hover) {
+				.sub-menu {
+					display: block;
+
+					@media only screen and (max-width: $M) {
+						display: none;
+						
+						&--active {
+							display: block;
+						}
+					}
+				}
+			}
+
+			:is(&:focus-visible) {
+				outline: none;
+				box-shadow: 0px 0px 0px 2px $LIGHT;
+			}
+
+		}
+	}
+}
+
+.sub-menu-btn {
+	width: 20px;
+	color: $WHITE;
+	display: none;
+	background: none;
+	cursor: pointer;
+	border: none;
+
+	:is(&:hover) {
+		background-color: $DARK;
+	}
+
+	@media only screen and (max-width: $M) {
+		display: block;
+		float: right;
+		width: 2rem;
+		height: 22px;
+	}
+}
+
+.sub-menu {
+	display: none;
+	background-color: $BLACK;
+	position: absolute;
+	margin-top: 0.25rem;
+	padding-top: 1rem;
+	margin-left: -0.25rem;
+
+	@media only screen and (max-width: $M) {
+		
+		position: static;
+		display: none;
+		padding: 0.5rem 0;
+    	border-left: 2px solid $WHITE;
+
+		&--active {
+			display: block;
+		}
+	}
+
+	&__sub-item {
+
+		list-style-type: none;
+
+		&__link {
+			display: block;
+			padding: 0.5rem;
+			color: $WHITE;
+			white-space: nowrap;
 
 			:is(&.active, &:hover, &:focus) {
 				box-shadow: 0px 2px 0px $LIGHT;
@@ -143,17 +298,29 @@ body {
 				box-shadow: 0px 0px 0px 2px $LIGHT;
 			}
 		}
+
+		&:first-child {
+			margin-top: 0;
+		}
 	}
 }
 
 /* == HEADER IMAGE == */
 
 .header-image {
-	height: 80vh;
+	@include flex(flex-start, center);
+	min-height: 80vh;
+	padding: 2rem 0;
 	background-image: url('./assets/img/gyros-header.jpeg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position-y: center;
+
+	&--partnership {
+
+		background-image: url('./assets/img/partnership-header.jpeg');
+		background-position-x: center;
+	}
 }
 
 /* === CARD === */
@@ -163,8 +330,7 @@ body {
 	overflow: hidden;
 	position: relative;
 	background-color: $DARK;
-	width: 100%;
-	max-width: $CARD_WIDTH;
+	flex-basis: calc(100% / 4 - 2rem);
 	min-height: $CARD_HEIGHT;
 	border-radius: 0.5rem;
 	background-size: cover;
@@ -173,6 +339,16 @@ body {
 	padding: 1rem;
 	@include flex(space-between, flex-start, column);
 	transition: $MEDIUM_TIME;
+
+	@media only screen and (max-width: $L) {
+		flex-basis: calc(100% / 2 - 2rem);
+	}
+
+	@media only screen and (max-width: $S) {
+		flex-basis: calc(100% - 2rem);
+		margin: 1rem 0.5rem;
+	}
+
 
 	&__info-icon {
 		@include flex();
@@ -257,7 +433,7 @@ body {
 
 .section {
 	@include flex(flex-start);
-	height: 100vh;
+	min-height: 100vh;
 	background-size: cover;
 	background-position: right center;
 	position: relative;
@@ -266,14 +442,19 @@ body {
 	&__headline {
 		position: absolute;
 		left: 50%;
-		top: 1rem;
+		top: calc(1vw + 60px);
 		text-align: center;
-		font-size: 16rem;
+		font-size: min(18vw, 13rem);
 		color: $WHITE;
 		transform: translate(-50%, 0%);
 		transform-origin: left top;
 		text-shadow: 4px 4px 1px $BLACK;
 		animation: HEADLINE-ANIMATION 2s forwards;
+
+		&--donuts {
+			line-height: 0.9;
+			font-size: min(18vw, 11rem);
+		}
 	}
 
 	@keyframes HEADLINE-ANIMATION {
@@ -285,10 +466,16 @@ body {
 
 		@include flex(center, center, column);
 		width: 50%;
-		height: 100%;
+		min-height: 100vh;
 		padding: 1rem;
 		background-color: rgba($BLACK, 0.5);
 		color: $WHITE;
+
+		@media only screen and (max-width: $L) {
+
+			width: 100%;
+			
+		}
 	}
 	
 
@@ -301,25 +488,111 @@ body {
 		td {
 			background-color: rgba($ORANGE, 0.95);
 			color: $WHITE;
-			padding: 0.5rem;
+			padding: 0.25rem;
 			border-radius: 0.5rem;
 		}
 
+		th,
+		thead th, 
 		tfoot th, 
 		tfoot td {
-
+			font-weight: 400;
 			background-color: rgba($PLANKTON, 0.95);
 		}
-	}
 
-	@media only screen and (max-width: $M) {
-		&__dark {
-			width: 100%;
+		&--pizza,
+		&--sandwich {
+
+			margin-top: calc(10rem + 60px);
+
+			th,
+			td {
+				padding: 0.15rem 0.25rem;
+			}
+		}
+
+		@media only screen and (max-width: $S) {
+
+			th,
+			td {
+				font-size: 0.9rem;
+			}
 		}
 	}
+
+	
 }
 
 /* === MENU END === */
+
+
+/* === OUR-STORY === */
+
+.our-story {
+
+	width: 100%;
+	color: $WHITE;
+	padding: 1rem;
+	border-radius: 1rem;
+	background-color: rgba($BLACK, 0.8);
+	max-width: 400px;
+
+	@media only screen and (max-width: $M) {
+		max-width: none;
+	}
+}
+
+/* === OUR-STORY END === */
+
+
+/* === CONTACT === */
+
+.contact-item {
+
+	width: calc((100% / 2) - 1rem);
+
+	&__headline {
+
+		text-transform: uppercase;
+		color: $ORANGE;
+		margin: 2rem 0 0.5rem;
+	}
+
+	&__headline:first-child {
+
+		margin-top: 0;
+	}
+
+	&__content {
+
+		color: $BLACK;
+
+		&__map {
+			height: 600px;
+			border: 0.5rem solid $PLANKTON!important;
+		}
+
+		> a {
+
+			color: $BLACK;
+			text-decoration: underline;
+		}
+
+		&__image {
+			display: inline-block;
+			width: 48px;
+			height: 48px;
+			margin-right: 1rem;
+		}
+	}
+
+	@media only screen and (max-width: $S) {
+		width: 100%;
+	}
+}
+
+/* === CONTACT END === */
+
 
 /* === FOOTER === */
 
@@ -348,6 +621,15 @@ body {
 			margin: 1rem;
 			text-align: left;
 			flex-basis: calc(25% - 2rem);
+			flex-wrap: wrap;
+
+			@media only screen and (max-width: $L) {
+				flex-basis: calc(50% - 2rem);
+			}
+		
+			@media only screen and (max-width: $S) {
+				flex-basis: calc(100% - 2rem);
+			}
 
 			h3 {
 				color: $ORANGE;
@@ -368,14 +650,6 @@ body {
 				}
 			}
 		}
-
-		@media only screen and (max-width: $M) {
-
-			&__item {
-				flex-basis: calc(50% - 2rem);
-				text-align: center;
-			}
-		}
 	}
 
 	&__social-media {
@@ -385,12 +659,14 @@ body {
 		&__item {
 			cursor: pointer;
 			border-radius: 100%;
+			display: inline-block;
 			margin: 0 1rem;
 
 			img {
 				width: 48px;
 				height: 48px;
 				border-radius: 100%;
+				vertical-align: middle;
 			}
 		}
 	}

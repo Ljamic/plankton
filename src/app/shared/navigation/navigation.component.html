@@ -1,6 +1,11 @@
 <header class="header">
 	<div class="container">
 		<div class="logo"></div>
+		<div class="burger-menu" [class.burger-menu--active]="burgerMenuActive" (click)="burgerMenuActive = !burgerMenuActive">
+			<div class="burger-menu__dashe"></div>
+			<div class="burger-menu__dashe"></div>
+			<div class="burger-menu__dashe"></div>
+		</div>
 		<nav class="nav">
 			<ul class="main-menu">
 				<li class="main-menu__nav-item">
@@ -10,8 +15,38 @@
 				</li>
 				<li class="main-menu__nav-item">
 					<a routerLink="menu" routerLinkActive="active" class="main-menu__nav-item__link">
-						MENI
+						<span (click)="burgerMenuActive = false">MENI</span> <button (click)="subMenuOpen = !subMenuOpen" class="sub-menu-btn">
+							{{ subMenuOpen ? '-' : '+' }}
+						</button>
+
+						<ul class="sub-menu" [class.sub-menu--active]="subMenuOpen">
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="gyros">GIROS</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="pizza">PIZZA</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="pancake">PALAČINKE</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="sandwiches">SENDVIČI</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="salads">SALATE</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="donuts">AMERIČKE KROFNICE</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="pomfrit">POMFRIT</a>
+							</li>
+							<li class="sub-menu__sub-item">
+								<a class="sub-menu__sub-item__link" routerLink="/menu" fragment="omelette">OMLETI</a>
+							</li>
+						</ul>
 					</a>
+					
 				</li>
 				<!-- <li class="main-menu__nav-item">
 					<a routerLink="producing-process" routerLinkActive="active" class="main-menu__nav-item__link">

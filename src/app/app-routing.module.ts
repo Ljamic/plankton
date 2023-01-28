@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { OurStoryComponent } from './our-story/our-story.component';
@@ -11,12 +12,14 @@ const routes: Routes = [
   { path: 'producing-process', component: HomeComponent , data: { animation: 'isRight' } },
   { path: 'our-story', component: OurStoryComponent , data: { animation: 'isRight' } },
   { path: 'partnership', component: PartnershipComponent , data: { animation: 'isRight' } },
-  { path: 'contact', component: HomeComponent , data: { animation: 'isRight' } },
+  { path: 'contact', component: ContactComponent , data: { animation: 'isRight' } },
   { path: '**', redirectTo: '' , data: { animation: 'isRight' } }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { 
+    anchorScrolling: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

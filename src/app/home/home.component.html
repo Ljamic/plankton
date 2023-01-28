@@ -10,12 +10,16 @@
         </a>
     </div>
 </div>
-<div class="container" id="test">
-    <a routerLink="/menu" [fragment]="product.url" class="card" [style.background-image]="'url(' + product.img + ')'" [product]="product" *ngFor="let product of [
-        { headline: 'Giros', img: '../assets/img/card/gyros.jpeg', description: 'Ukusi Grcke u srcu Vince...', url: 'gyros'},
-        { headline: 'Pizza', img: '../assets/img/card/pizza.jpeg', description: 'Piza od domaceg testa, pecena na visokoj temperaturi....', url: 'pizza'},
-        { headline: 'Palacinke', img: '../assets/img/card/pancake.jpeg', description: 'Slatke / Slane - Po babinm receptu...', url: 'pancake'},
-        { headline: 'Sendvici', img: '../assets/img/card/sandwich.jpeg', description: 'Jede on tebe jedes ti njega...', url: 'sandwiches'},
+<div class="container container--card">
+    <a routerLink="/menu" [fragment]="product.url" class="card" [title]="product.headline" [style.background-image]="'url(' + product.img + ')'" [product]="product" *ngFor="let product of [
+        { headline: 'Giros', img: '../assets/img/card/gyros.jpeg', description: 'Ukusi Grčke u srcu Vinče.', url: 'gyros'},
+        { headline: 'Pizza', img: '../assets/img/card/pizza.jpeg', description: 'Svaki italijan bi pozavideo.', url: 'pizza'},
+        { headline: 'Palacinke', img: '../assets/img/card/pancake.jpeg', description: 'Slatke / Slane - Po babinm receptu.', url: 'pancake'},
+        { headline: 'Sendvici', img: '../assets/img/card/sandwich.jpeg', description: 'Jede on tebe jedes ti njega.', url: 'sandwiches'},
+        { headline: 'Salate', img: '../assets/img/card/salads.jpeg', description: 'Gaj Julije je mešao.', url: 'salads'},
+        { headline: 'Američke krofnice', img: '../assets/img/card/donuts.jpeg', description: 'Baš takve jede Homer Simpson.', url: 'donuts'},
+        { headline: 'Pomfrit', img: '../assets/img/card/pomfrit.jpeg', description: 'Orginal francuski.', url: 'pomfrint'},
+        { headline: 'Omleti', img: '../assets/img/card/omelett.jpeg', description: 'Doručak kao na selu.', url: 'omelette'},
     ]">
     </a>
 </div>
