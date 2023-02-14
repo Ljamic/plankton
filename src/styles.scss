@@ -27,6 +27,7 @@ $ORANGE: rgb(243 128 1);
 $BLACK: #000;
 $WHITE: #FFF;
 $PLANKTON: rgb(47 110 21);
+$SELECT: rgb(241, 65, 65);
 
 /* === SIZES END === */
 
@@ -64,7 +65,7 @@ $number-array: 1, 1_5, 2, 2_5, 3, 3_5, 4, 4_5, 5, 5_5, 6, 6_5, 7, 7_5, 8, 8_5, 9
 }
 
 ::selection {
-	background-color: $PLANKTON;
+	background-color: $SELECT;
 }
 
 body {
@@ -206,7 +207,8 @@ body {
 
 		&__link {
 
-			display: block;
+			@include flex(space-between);
+			flex-wrap: wrap;
 			padding: 0.25rem;
 			color: $LIGHT;
 			text-decoration: none;
@@ -252,10 +254,9 @@ body {
 	}
 
 	@media only screen and (max-width: $M) {
-		display: block;
-		float: right;
+		@include flex();
 		width: 2rem;
-		height: 22px;
+		height: 2rem;
 	}
 }
 
@@ -275,6 +276,7 @@ body {
     	border-left: 2px solid $WHITE;
 
 		&--active {
+			width: 100%;
 			display: block;
 		}
 	}
@@ -315,6 +317,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position-y: center;
+	background-position-x: 80%;
 
 	&--partnership {
 
@@ -442,7 +445,7 @@ body {
 	&__headline {
 		position: absolute;
 		left: 50%;
-		top: calc(1vw + 60px);
+		top: calc(1vw + 40px);
 		text-align: center;
 		font-size: min(18vw, 13rem);
 		color: $WHITE;
@@ -465,15 +468,25 @@ body {
 	&__dark {
 
 		@include flex(center, center, column);
-		width: 50%;
+		min-width: 50%;
 		min-height: 100vh;
 		padding: 1rem;
 		background-color: rgba($BLACK, 0.5);
 		color: $WHITE;
 
+		&--palacinke {
+
+			padding-top: 15rem;
+		}
+
 		@media only screen and (max-width: $L) {
 
 			width: 100%;
+
+			&--palacinke {
+
+				padding-top: 5rem;
+			}
 			
 		}
 	}
@@ -490,6 +503,10 @@ body {
 			color: $WHITE;
 			padding: 0.25rem;
 			border-radius: 0.5rem;
+		}
+
+		tbody th {
+			white-space: nowrap;
 		}
 
 		th,
@@ -512,6 +529,10 @@ body {
 		}
 
 		@media only screen and (max-width: $S) {
+
+			tbody th {
+				white-space: break-spaces;
+			}
 
 			th,
 			td {
